@@ -1,0 +1,14 @@
+{
+  "name": "civiclens",
+  "version": "1.0.0",
+  "description": "CivicLens - Passive AI Dashcam & Municipal Heatmap",
+  "scripts": {
+    "start:backend": "npm --prefix backend start",
+    "start:client": "npm --prefix client dev",
+    "dev": "node start-all.js",
+    "build": "npm --prefix client run build"
+  },
+  "keywords": ["civiclens", "smart-city", "dashcam-ai", "municipal-gis", "dpdp"],
+  "author": "CivicLens Team",
+  "license": "MIT"
+}

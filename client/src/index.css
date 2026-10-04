@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+
+  /* Surface Bases */
+  --surface-light: #EBECF0;
+  --surface-dark: #0D111A;
+  --surface-card: #131826;
+  --surface-accent-liquid: #10B981; /* Eco Emerald */
+  --surface-accent-warn: #F59E0B;   /* Silt Amber */
+  --surface-accent-alert: #EF4444;  /* Severe Red */
+  --surface-accent-cyan: #06B6D4;   /* Cyber Cyan */
+
+  /* Reactive Light Coordinate Offsets */
+  --light-x: 4px;
+  --light-y: 4px;
+  --blur-radius: 12px;
+
+  /* Neumorphic Extrusion (Dark Mode z1 to z3) */
+  --shadow-extrude-z1: 
+    calc(var(--light-x) * -1) calc(var(--light-y) * -1) calc(var(--blur-radius) * 0.8) rgba(255, 255, 255, 0.04),
+    var(--light-x) var(--light-y) var(--blur-radius) rgba(0, 0, 0, 0.6);
+  
+  --shadow-extrude-z2: 
+    calc(var(--light-x) * -1.5) calc(var(--light-y) * -1.5) calc(var(--blur-radius) * 1.2) rgba(6, 182, 212, 0.12),
+    var(--light-x) var(--light-y) calc(var(--blur-radius) * 1.5) rgba(0, 0, 0, 0.8);
+
+  /* Neumorphic Inset (Inputs & Cavities z-1, z-2) */
+  --shadow-inset-cavity: 
+    inset var(--light-x) var(--light-y) var(--blur-radius) rgba(0, 0, 0, 0.75),
+    inset calc(var(--light-x) * -1) calc(var(--light-y) * -1) calc(var(--blur-radius) * 0.6) rgba(255, 255, 255, 0.03);
+
+  /* Viscous Filter Reference */
+  --fluid-filter: url('#gooey-meniscus-filter');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--surface-dark);
+  color: #F3F4F6;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Depth Classes */
+.depth-z0 {
+  background-color: var(--surface-dark);
+}
+
+.depth-z1 {
+  background: linear-gradient(145deg, #161C2C, #0F1420);
+  box-shadow: var(--shadow-extrude-z1);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.depth-z2 {
+  background: linear-gradient(145deg, #182033, #111726);
+  box-shadow: var(--shadow-extrude-z2);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+.depth-inset {
+  background-color: #0A0D14;
+  box-shadow: var(--shadow-inset-cavity);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* Kinetic Spring Buttons */
+.spring-press {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.spring-press:hover {
+  transform: translateY(-2px);
+}
+.spring-press:active {
+  transform: scale(0.96) translateY(2px);
+  box-shadow: var(--shadow-inset-cavity) !important;
+}
+
+/* Hover Elevation Card */
+.hover-elevate {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.hover-elevate:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-extrude-z2);
+  border-color: rgba(6, 182, 212, 0.4);
+}
+
+/* Floating Animation */
+@keyframes organic-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0.5deg);
+  }
+}
+
+.animate-float {
+  animation: organic-float 6s ease-in-out infinite;
+}
+
+/* Glowing Pulsing Animation */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.2), var(--shadow-extrude-z1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.4), var(--shadow-extrude-z2);
+  }
+}
+
+.animate-glow {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+/* Gooey Liquid Elements */
+.gooey-wrapper {
+  filter: url('#gooey-meniscus-filter');
+}
+
+.gooey-subtle {
+  filter: url('#gooey-subtle-filter');
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0D14;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Leaflet map dark styling */
+.leaflet-container {
+  background: #080C14 !important;
+  font-family: inherit !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #111827 !important;
+  color: #F3F4F6 !important;
+  border: 1px solid #1F2937 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.8) !important;
+}
+
+.leaflet-popup-tip {
+  background: #111827 !important;
+}
+
+/* Liquid Slosh Wave Animation for Reservoir */
+@keyframes liquid-slosh {
+  0% {
+    transform: rotate(0deg) scaleY(1);
+  }
+  25% {
+    transform: rotate(2deg) scaleY(1.04);
+  }
+  50% {
+    transform: rotate(0deg) scaleY(0.98);
+  }
+  75% {
+    transform: rotate(-2deg) scaleY(1.03);
+  }
+  100% {
+    transform: rotate(0deg) scaleY(1);
+  }
+}
+
+.liquid-wave-slosh {
+  animation: liquid-slosh 4s ease-in-out infinite;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .gooey-wrapper, .gooey-subtle, .animate-float, .animate-glow {
+    filter: none !important;
+    animation: none !important;
+  }
+}
